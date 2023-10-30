@@ -60,9 +60,9 @@
                 document.write("<p>Product is: " + g + "</p>");
                 
                 // When to use let and var!!!!
-                var message="Great!" //defined by scope because of 'let'
+                let message="Great!" //defined by scope because of 'let'
                 if(true) {
-                    var message = "Fantastic!"
+                    let message = "Fantastic!"
                     console.log("IN the if " + message)
                 }
                 console.log("OUTSIDE the if " + message)
@@ -133,9 +133,8 @@
             <p>
             <img src="img/close.png" alt="">
                 <script>
-                    document.getElementById("p1").textContent="Changed";
-                    document.getElementById("p2").innerHTML="Andrew";
-                    document.getElementById("p3").innerHTML="Andrew";
+                    document.getElementById("p1").textContent="<p>Gold</p>";
+                    document.getElementById("p3").innerHTML = "<p> Goofy </p>"
                     document.getElementById("p2").innerHTML="<img src=\"img/die2.png\">";
                 </script>
 
@@ -156,7 +155,7 @@
                     
                     let result = num1 + num2
                     //output
-                    document.getElementById("result").textContent = "--"+result
+                    document.getElementById("result").textContent = "--"+result;
 
                 }
             </script>
@@ -177,9 +176,21 @@
                 </p>
 
                 <p id="message">
-
+                    
                 </p>
+                <script>
+                    function welcome() {
+                        console.log("Even fired --- Welcome");
+                        var name = document.getElementById("cName").value;
+                        document.getElementById("message").textContent = "Welcome " + name;
+                    }
+                    // Event and the object
+                    var e1 = document.getElementById("cName");
 
+                    //associate the event with the event handler
+                    e1.addEventListener("blur", welcome, false);
+                    console.log(e1);
+                </script>
                 <p>
                     <label> Email:
                         <input type="text" id="cEmail">
@@ -192,11 +203,28 @@
         <div class="practice">
             <h1> Practice - Calculate Square</h1>
             Calculating Square:
-            <input type="text" id="num" placeholder="Type in a number"> <sup> 2 </sup> =
-            <label id="result"> ? </label>
+            
+            <input type="text" id="squarenum" placeholder="Type in a number"> <sup> 2 </sup>
+            <input type="button" id="button" value="=">
+            <label id="result2"> ? </label>
+            <script>
+                function square() {
+                    var mynumber = parseInt(document.getElementById("squarenum").value);
+                    var square_number = mynumber * mynumber;
+                    document.getElementById("result2").textContent = " " + square_number;
+                    console.log(square_number);
+                }
 
+                textbox = document.getElementById("squarenum");
+                textbox.addEventListener("blur", square, false);
+
+            </script>
+
+
+
+        
         </div>
-
+        <!--Having trouble with this one-->
         <div class="practice">
             <h1> Difference between textcontent and innerHTML</h1>
             <p> HTML Try it Editor </p>
@@ -207,8 +235,18 @@
 
             <input type="button" id="tryit" value="Click and Display"> 
 
-            <div id="message"> 
+            <div id="messageHTML"> 
             </div>
+            
+            <script>
+                function changeHTML() {
+                    var code = document.getElementById("code").value;
+                    document.getElementById("messageHTML").innerHTML = " " + code;
+                }
+
+                var btn = document.getElementById("tryit");
+                btn.addEventListener("click", changeHTML, false);
+            </script>
 
 
         </div>
@@ -232,6 +270,30 @@
             </p>
 
             <script type="text/javascript">
+                // Event  ---- Whenever the value changes, the price will updated.
+                function getcarprice() {
+                    console.log("Action");
+
+                    // get input
+                    var year = document.getElementById("year").value;
+                    var carcondition = document.getElementById("condition").value;
+
+                    console.log(year, carcondition);
+
+                    // make decision
+                    var price = 0;
+                    if (year == "2003" && carcondition == "Fair") {
+                        price = 2000;
+                    }
+
+                    console.log(price);
+                    // show output
+                    document.getElementById('price').textContent = price.toString();
+                }
+
+                // register event with the event handler
+                document.querySelector('#year').addEventListener('change', getcarprice, false);
+                document.querySelector('#condition').addEventListener('change', getcarprice, false);
 
 
 
