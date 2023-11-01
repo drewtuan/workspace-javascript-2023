@@ -450,14 +450,6 @@
 
             </div>
 
-            <script>
-                function maketable() {
-                    console.log("Button clicked!");
-
-                }
-
-                document.getElementById("dotable").addEventListener("click", maketable, false);
-            </script>
 
         </div>
 
@@ -467,14 +459,45 @@
             <!--  Input number box -->
             <p> N = <input type="number" min="1" max="10" id="inputnumber2"> </p>
             <p>
-                <input type="button" value="Click for multiplication table">
+                <input type="button" id="table_button" value="Click for multiplication table">
             </p>
 
             <!-- output section -->
-            <div id="output">
+            <div id="table_output">
 
 
             </div>
+
+            <script>
+                function maketable() {
+
+                    console.log("Button clicked!");
+                    var num = parseInt(document.getElementById("inputnumber2").value);
+                    var output = "";
+                    output += "<table>";
+                    console.log(num);
+                    
+                    // outside loop goes through the rows
+                    for(var i = 1; i <= num; i++) {
+    
+                        // inside loop
+                        output += "<tr>";
+                        // inside loop goes through the columns
+                        for(var j = 1; j <= num; j++) {
+                            var product = i * j;
+                            output += "<td>" + i + "x" + j + "=" + product + "</td>";
+                        }
+                        output += "</tr>";
+                    }
+                    output += "</table>";
+                    console.log(output);
+                    document.getElementById("table_output").innerHTML = output;
+                  
+
+                }
+
+                document.getElementById("table_button").addEventListener("click", maketable, false);
+            </script>
 
         </div>
 
