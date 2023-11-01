@@ -307,6 +307,38 @@
                 <input type="text" id="theme">
             </p>
 
+            <script>
+                // event --blur   eventhandler change background color
+                function changeTheme() {
+                    console.log("Change Theme fired");
+                    var theme = document.getElementById('theme').value;
+                    console.log(theme);
+
+                    var color = "white";
+
+                    switch(theme) {
+                        case "warm":
+                            color = "green"
+                            break;
+                        case "hot":
+                            color = "red"
+                            break;
+                        case "cool":
+                            color = "blue"
+                            break;
+                        default: 
+                            break;
+                    }
+                    document.body.style.backgroundColor = color;
+                }
+
+               
+
+                // register event
+                document.getElementById("theme").addEventListener('blur', changeTheme, false);
+
+            </script>
+
         </div>
 
 
@@ -314,28 +346,93 @@
         <div class="practice">
             <h1> Switch practice -- Insurance Application</h1>
             <p> Choose your coverage
-                <input type="radio" name="coverage" value="100000">100000
+                <input type="radio" name="coverage" value="100000" checked>100000
                 <input type="radio" name="coverage" value="200000">200000
                 <input type="radio" name="coverage" value="300000">300000
 
             </p>
+
             <p> Choose your age group.
                 <select id="agegroup">
-                    <option> under 30 </option>
-                    <option> 30-34 </option>
-                    <option> 35-39</option>
-                    <option> 40-44 </option>
-
+                    <option id="option"> under 30 </option>
+                    <option id="option"> 30-34 </option>
+                    <option id="option"> 35-39</option>
+                    <option id="option"> 40-44 </option>
+                    <option id="option"> 45-49 </option>
+                    <option id="option"> 50-54 </option>
+                    <option id="option"> 55-59</option>
+                    <option id="option"> 60-64 </option>
                 </select>
-
             </p>
             <p>
-                <input type="button" value="Check Premium">
+                <input type="button" value="Check Premium" id="check_premium_button">
             </p>
-            <p id="result">
+            <p id="premium_result">
 
             </p>
 
+            
+            <script>
+                // complete this exercise please!!!  No quiz on Wednesday. 
+                function get_premium() {
+
+                    // get coverage
+                    var coverage = parseFloat(document.querySelector('input[name="coverage"]:checked').value);
+                    //var otherway = document.querySelector('input[name="coverage"]:checked').value;
+                    console.log("The coverage is " + coverage);
+
+                    
+                    // var radioE = document.getElementById("cover1").checked;
+                    var ageindex = document.getElementById("agegroup").selectedIndex;
+                    console.log(ageindex);
+
+                    // make decision    
+                    var premium = 0;
+                    var base = 10;
+                    var agefactor = 0;
+
+                    switch(ageindex) {
+                        case 0:
+                            agefactor = 0.08
+                            break;
+                        case 1:
+                            agefactor = 0.09;
+                            break;
+                        case 2:
+                            agefactor = 0.11
+                            break;
+                        case 3:
+                            agefactor = 0.17;
+                            break;
+                        case 4:
+                            agefactor = 0.29;
+                            break;
+                        case 5:
+                            agefactor = 0.48;
+                            break;
+                        case 5:
+                            agefactor = 0.75;
+                            break;
+                        case 5:
+                            agefactor = 1.17;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    premium = base + agefactor * coverage/1000;
+                    document.getElementById("premium_result").textContent = " " + premium;
+
+                }
+
+                
+                document.getElementById("check_premium_button").addEventListener("click", get_premium, false);
+             
+
+            </script>
+
+           
+          
         </div>
 
 
@@ -346,8 +443,21 @@
             <p> Display the square of numer 1... N </p>
             <p> N = <input type="number" min="1" max="10" id="inputnumber1"> </p>
             <p>
-                <input type="button" value="Click for Square">
+                <input type="button" id="dotable" value="Click for Square">
             </p>
+
+            <div id="looptable">
+
+            </div>
+
+            <script>
+                function maketable() {
+                    console.log("Button clicked!");
+
+                }
+
+                document.getElementById("dotable").addEventListener("click", maketable, false);
+            </script>
 
         </div>
 
