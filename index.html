@@ -523,7 +523,7 @@
         <div class="practice">
             <h1>Change Attribute -- Rolling a dice </h1>
             <p> <input type="button" id="roll" value="roll" /> </p>
-            <p> <img src="img/die1.png"> </p>
+            <p> <img id="dieimage" src="img/die1.png"> </p>
             <table>
                 <tr>
                     <th>Result</th>
@@ -544,6 +544,48 @@
                     <td id="r6"></td>
                 </tr>
             </table>
+
+            <script>
+                var statistics = [0,0,0,0,0,0];
+                // event and event handler
+                function rolldice() {
+                    // get random number 1 - 6
+                    var random_number = Math.floor(1 + Math.random() * 6);
+
+                    statistics[random_number - 1] += 1;
+
+                    // change the image src attribute
+                    var e = document.getElementById("dieimage");
+                    e.setAttribute("src", "img/die" + random_number + ".png");
+                    console.log(random_number);
+
+                    document.getElementById("r" + random_number).textContent = statistics[random_number - 1].toString();
+
+                   
+                }
+
+                // register the event
+                document.getElementById("roll").addEventListener("click", rolldice, false);
+                
+                //testarray[100] = 6;
+                //testarray[79] = 56;
+                /*
+                var testarray = [1,2,3,4,5,6];
+                testarray.push(6);
+                testarray.push(8);
+                console.log(testarray);
+                testarray.pop();
+                console.log(testarray);
+
+                for (var i in testarray) {
+                    console.log(i,testarray[i]);
+                }
+
+                testarray.forEach(e => console.log(e));
+                */
+
+
+            </script>
 
         </div>
 
@@ -566,6 +608,23 @@
                 <img src="img/usca5.jpg" alt="usca">
             </div>
 			<script>
+
+                var imagelist = document.querySelectorAll(".img-container-hide");
+                var index = 0;
+                imagelist[index].setAttribute("class", "img-container-hide");
+               
+
+                function updatebanner() {
+                    imagelist[index].setAttribute("class", "img-container-hide");
+                    index++;
+                    index = index % 5;
+                    imagelist[index].setAttribute("class", "img-container");
+
+                }
+
+                //auto update the banner
+                setInterval(updatebanner, 5000);
+                
 				
 			</script>
 
@@ -602,6 +661,7 @@
                         <input id="lists" type="button" value="List current reservations">
                     </p>
                 </form>
+                <div id="guestlist"></div>
                 <script src="js/hotel.js"></script>
             </div>
 
